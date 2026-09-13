@@ -214,7 +214,7 @@ def main(self: object, argv: list[str]):
             initial_text = "".join(f.readlines())
     else:
         if clipboard_text := get_clipboard():
-            if RE_URL.fullmatch(clipboard_text) is not None and opts.url is not None:
+            if RE_URL.fullmatch(clipboard_text) is not None and opts.url is None:
                 initial_text = "<++>"
                 url = clipboard_text
             else:
