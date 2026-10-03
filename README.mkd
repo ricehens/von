@@ -1,4 +1,4 @@
-# VON: Problem Database
-See [orig]. This version is optimized for my setup and includes some cool additional features I use.
+# VON
+My personal fork of VON that I've been using for years, has some extra features :-)
 
-[orig]: https://github.com/vEnhance/von
+though tbh it's forked from a very old version of VON and idrk what's in the current version.
