@@ -17,19 +17,22 @@ def user_file_input(initial = "", extension = ".tmp", pre_hook = None, post_hook
 	If post_hook is not None, runs post_hook(tf.name, contents) after calling EDITOR.
 	"""
 
-	with tempfile.NamedTemporaryFile(suffix=extension) as tf:
+	with tempfile.NamedTemporaryFile(suffix=extension, delete=False) as tf:
 		tf.write(initial.encode())
-		tf.flush()
+		# tf.flush()
+		tf.close()
 		if pre_hook is not None:
 			pre_hook(tf.name)
 		subprocess.call([EDITOR, tf.name])
 
 		# do the parsing with `tf` using regular File operations.
 		# for instance:
+		tf = open(tf.name, 'r')
 		tf.seek(0)
-		edited_message = ''.join(_.decode('utf-8') for _ in tf.readlines())
+		edited_message = ''.join(_ for _ in tf.readlines())
 		if post_hook is not None:
 			post_hook(tf.name, edited_message)
+			os.unlink(tf.name)
 	return edited_message
 
 def alert_error_tryagain(message = ''):
@@ -38,8 +41,7 @@ def alert_error_tryagain(message = ''):
 	return input("** Press enter to continue: ")
 
 PS_INSTRUCT = """% Input your problem and solution below.
-% Three dashes on a newline indicate the breaking points.
-% vim: tw=72"""
+% Three dashes on a newline indicate the breaking points."""
 
 def get_bodies(raw_text, opts):
 	initial = PS_INSTRUCT + NSEPERATOR + raw_text

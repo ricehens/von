@@ -9,7 +9,7 @@ import collections
 import yaml
 import pickle as pickle
 
-from .strparse import demacro, toAOPS
+from .strparse import demacro, toAOPS, toHTML
 
 def shortenPath(path):
 	return os.path.relpath(path, VON_BASE_PATH)
@@ -18,7 +18,7 @@ def completePath(path):
 def vonOpen(path, *args, **kwargs):
 	return open(completePath(path), *args, **kwargs)
 
-class pickleObj(collections.MutableMapping):
+class pickleObj(collections.abc.MutableMapping):
 	def _initial(self):
 		return None
 	def __init__(self, path, mode='rb'):

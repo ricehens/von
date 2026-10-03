@@ -1,5 +1,6 @@
 from . import add
 from . import asy
+from . import blog
 from . import clear
 from . import edit
 from . import index
@@ -9,6 +10,7 @@ from . import show
 from . import status
 from . import cd
 from . import solve
+from . import tex
 
 class VonController:
 	do_asy = asy.main
@@ -29,5 +31,7 @@ class VonController:
 		self.do_cd(['.'] + argv)
 	do_cs = do_cd
 
+	do_blog = blog.main
 	do_po = po.main
 	do_solve = solve.main
+	do_tex = tex.main

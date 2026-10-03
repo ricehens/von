@@ -30,7 +30,7 @@ class VonTerminal(cmd.Cmd, controller.VonController):
 	def prompt(self):
 		return APPLY_COLOR("BOLD_CYAN", "VON/") + \
 				APPLY_COLOR("YELLOW", self.getcwd()) + \
-				"\n" + APPLY_COLOR("BOLD_GREEN", ":)") + " "
+				" " + APPLY_COLOR("BOLD_GREEN", ":)") + " "
 
 	def emptyline(self):
 		pass

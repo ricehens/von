@@ -10,6 +10,9 @@ parser.add_argument('-b', '--body', nargs = '?',
 parser.add_argument('-a', '--aops', action='store_const',
 		const = True, default = False,
 		help = "Returns string in `AoPS mode'. Automatically causes -b.")
+parser.add_argument('-w', '--html', action='store_const',
+		const = True, default = False,
+		help = "Returns string in `HTML mode'. Automatically causes -b.")
 parser.add_argument('-p', '--preserve', action='store_const',
 		const = True, default = False,
 		help = "With -b, suppress macro expansion from body.")
@@ -25,7 +28,7 @@ def main(self, argv):
 	else:
 		problem = entry.full
 		b = opts.body
-		if b is None and opts.aops:
+		if b is None and (opts.aops or opts.html):
 			b = 0
 		if b is None:
 			view.printProblem(problem)
@@ -33,6 +36,8 @@ def main(self, argv):
 			try:
 				if opts.aops:
 					view.out(model.toAOPS(problem.bodies[b]))
+				elif opts.html:
+					view.out(model.toHTML(problem.bodies[b]))
 				elif opts.preserve:
 					view.out(problem.bodies[b])
 				else:
