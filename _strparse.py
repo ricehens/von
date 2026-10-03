@@ -68,8 +68,8 @@ def toAOPS(text):
 	text = re.sub(r"\\begin{([^}]*)}\[([^\]]*)\]" + "\n", r"\\begin{\1}" + "\n" + r"[\2] ", text)
 	for env in ['theorem', 'claim', 'lemma', 'proposition', 'corollary', 'definition',\
 			'remark', 'generalization', 'restated problem']:
-		text = re.sub(r"\\begin{" + env + "\*}", "\n\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
-		text = re.sub(r"\\end{" + env + "\*}", "", text)
+		text = re.sub(r"\\begin{" + env + r"\*}", "\n\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
+		text = re.sub(r"\\end{" + env + r"\*}", "", text)
 		text = re.sub(r"\\begin{" + env + "}", "\n\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
 		text = re.sub(r"\\end{" + env + "}", "", text)
 	text = re.sub(r"\\begin{proof}", "\n\n[i]Proof.[/i] ", text)
@@ -133,12 +133,12 @@ def toAOPS1(text):
 	text = re.sub(r"\\begin{([^}]*)}\[([^\]]*)\]" + "\n", r"\\begin{\1}" + "\n" + r"[\2] ", text)
 	for env in ['theorem', 'claim', 'lemma', 'proposition', 'corollary', 'definition',\
 			'remark', 'generalization', 'restated problem']:
-		text = re.sub(r"\\begin{" + env + "\*}\s*\n", "\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
-		text = re.sub(r"\\end{" + env + "\*}", "", text)
-		text = re.sub(r"\\begin{" + env + "}\s*\n", "\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
+		text = re.sub(r"\\begin{" + env + "\\*}\\s*\n", "\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
+		text = re.sub(r"\\end{" + env + r"\*}", "", text)
+		text = re.sub(r"\\begin{" + env + "}\\s*\n", "\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
 		text = re.sub(r"\\end{" + env + "}", "", text)
 	text = re.sub(r"\\begin{proof}\s*\n", "[i]Proof.[/i] ", text)
-	text = re.sub("\n\s*" + r"\\end{proof}", r" $\\blacksquare$" + "\n", text)
+	text = re.sub("\n\\s*" + r"\\end{proof}", r" $\\blacksquare$" + "\n", text)
 	# Remove Asy opacities, doesn't work on AoPS
 	text = re.sub(r"=([^,=]+)\+opacity\(0.[0-9]+\);", "=invisible;", text)
 	# Replace \emph, \textit, et al
@@ -148,8 +148,8 @@ def toAOPS1(text):
 	text = re.sub(r"\\paragraph{([^}]*)}", r"[color=blue][b]\1[/b][/color]", text)
 	text = re.sub(r"\\url{([^}]*)}", r"[url]\1[/url]", text)
 	text = re.sub(r"\\href{([^}]*)}{([^}]*)}", r"[url=\1]\2[/url]", text)
-	text = re.sub(r"\\begin{customsol}{([^}]*)}" + "\s*\n", r"[color=blue][b]Solution \1.[/b][/color] ", text)
-	text = re.sub(r"\\begin{customenv}{([^}]*)}" + "\s*\n", r"[color=blue][b]\1.[/b][/color] ", text)
+	text = re.sub(r"\\begin{customsol}{([^}]*)}" + "\\s*\n", r"[color=blue][b]Solution \1.[/b][/color] ", text)
+	text = re.sub(r"\\begin{customenv}{([^}]*)}" + "\\s*\n", r"[color=blue][b]\1.[/b][/color] ", text)
 	text = re.sub(r"\\setcounter{([^}]*)}{([^}]*)}", r"", text)
 	text = re.sub(r"\\setcounter{([^}]*)}([^\n]*)", r"", text)
 

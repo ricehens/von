@@ -78,8 +78,8 @@ def toAOPS(text):
 	text = re.sub(r"\\begin{([^}]*)}\[([^\]]*)\]" + "\n", r"\\begin{\1}" + "\n" + r"[\2] ", text)
 	for env in ['theorem', 'claim', 'lemma', 'proposition', 'corollary', 'definition',\
 			'remark', 'generalization', 'restated problem']:
-		text = re.sub(r"\\begin{" + env + "\*}", "\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
-		text = re.sub(r"\\end{" + env + "\*}", "", text)
+		text = re.sub(r"\\begin{" + env + r"\*}", "\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
+		text = re.sub(r"\\end{" + env + r"\*}", "", text)
 		text = re.sub(r"\\begin{" + env + "}", "\n[color=red][b]" + env.title() + r":[/b][/color] ", text)
 		text = re.sub(r"\\end{" + env + "}", "", text)
 	text = text.replace(r"\begin{proof}", "\n[i]Proof.[/i] ")
@@ -153,8 +153,8 @@ def toHTML0(text):
 	text = re.sub(r"\\begin{([^}]*)}\[([^\]]*)\]" + "\n", r"\\begin{\1}" + "\n" + r"[\2] ", text)
 	for env in ['theorem', 'claim', 'lemma', 'proposition', 'corollary', 'definition',\
 			'remark', 'generalization', 'restated problem']:
-		text = re.sub(r"\\begin{" + env + "\*}", "\n\n<span style=\"color:red; font-weight:bold;\">" + env.title() + r":</span> ", text)
-		text = re.sub(r"\\end{" + env + "\*}", "", text)
+		text = re.sub(r"\\begin{" + env + r"\*}", "\n\n<span style=\"color:red; font-weight:bold;\">" + env.title() + r":</span> ", text)
+		text = re.sub(r"\\end{" + env + r"\*}", "", text)
 		text = re.sub(r"\\begin{" + env + "}", "\n\n<span style=\"color:red; font-weight:bold;\">" + env.title() + r":</span> ", text)
 		text = re.sub(r"\\end{" + env + "}", "", text)
 	text = re.sub(r"\\begin{proof}", "\n\n<i>Proof.</i> ", text)
